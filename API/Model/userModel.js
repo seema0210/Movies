@@ -1,5 +1,5 @@
 const mongoose = require('mongoose')
-
+// create schema for user
 const userSchema = new mongoose.Schema({
     name : {
         type : String,
@@ -15,4 +15,4 @@ const userSchema = new mongoose.Schema({
     }
 })
 
-module.exports = mongoose.model('user',userSchema)
+module.exports = mongoose.model('user',userSchema) // create module, connect Schema to db

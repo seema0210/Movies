@@ -5,7 +5,7 @@ const bcrypt = require('bcryptjs')
 const getAllData = async(req,res) => {
     let data;
     try{
-        data = await User.find()
+        data = await User.find()  // get all data from database
     } catch(e){
         console.log(e)
     }
@@ -15,10 +15,10 @@ const getAllData = async(req,res) => {
     return res.send(data)
 }
 const getData = async (req,res) => {
-    const id = req.params.id;
+    const id = req.params.id;  // get id from request
     let data;
     try{
-        data = await User.findById(id)
+        data = await User.findById(id) // find the data od current id
     } catch(e){
         console.log(e)
     }
@@ -34,10 +34,10 @@ const addUser = async(req,res) => {
         res.send({message : 'All fields are mendatory'})
     }
     let data;
-    const hashedPassword = bcrypt.hashSync(password)
+    const hashedPassword = bcrypt.hashSync(password)  // password convert into hash formate and asign to password
     try{
         data = new User({name,email,password:hashedPassword})
-        await data.save()
+        await data.save()  // new created data save in mongodb
     } catch(e){
         console.log(e)
     }
@@ -45,12 +45,12 @@ const addUser = async(req,res) => {
 }
 
 const updateData = async(req,res) => {
-    const id = req.params.id;
+    const id = req.params.id;  // get id from request
     const { name,email,password } = req.body;
     let data;
     try{
-        data = await User.findByIdAndUpdate(id, {name,email,password})
-        data.save()
+        data = await User.findByIdAndUpdate(id, {name,email,password}) // update current id data
+        data.save()  // save updates in mongodb
     } catch(e){
         console.log(e)
     }
@@ -64,7 +64,7 @@ const deleteData = async(req,res) => {
     const id = req.params.id;
     let data;
     try{
-        data = await User.findByIdAndDelete(id)
+        data = await User.findByIdAndDelete(id)  // delete data from db
     } catch(e){
         console.log(e)
     }
